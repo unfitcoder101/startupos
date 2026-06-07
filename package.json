@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "scripts": {
+    "dev": "nodemon --no-inspect index.js",
+    "start": "node index.js"
+  }
+}
