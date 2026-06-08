@@ -1,7 +1,7 @@
 const express = require('express')
 require('dotenv').config()
 const connectDB = require('./server/config/db')
-
+const workspaceRoutes = require('./server/routes/workspace')
 const authRoutes = require('./server/routes/auth')
 
 connectDB()
@@ -10,6 +10,7 @@ const app = express()
 app.use(express.json())
 
 app.use('/api/auth', authRoutes)
+app.use('/api/workspaces', workspaceRoutes)
 
 app.get('/', (req, res) => {
   res.json({ message: 'StartupOS API running' })
