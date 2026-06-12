@@ -1,5 +1,16 @@
 const { getRepoStats } = require("../services/githubService")
+const {getLeads} = require("../services/sheetsService")
 
+const getSheetLeads = async (req, res) => {
+    const sheetId = req.params.sheetId
+    try{
+        const leads = await getLeads(sheetId)
+        res.json(leads)
+
+    } catch(error){
+        res.status(500).json({message: error.message})
+    }
+}
 
 const getGithubStats = async (req, res) => {
 
@@ -14,4 +25,4 @@ const getGithubStats = async (req, res) => {
 
 }
 
-module.exports = {getGithubStats}
+module.exports = {getGithubStats, getSheetLeads}
