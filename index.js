@@ -5,7 +5,7 @@ const connectDB = require('./server/config/db')
 const workspaceRoutes = require('./server/routes/workspace')
 const authRoutes = require('./server/routes/auth')
 const integrationRoutes = require('./server/routes/integrations')
-
+const alertRoutes = require('./server/routes/alerts')
 connectDB()
 
 const app = express()
@@ -14,6 +14,7 @@ app.use(express.json())
 app.use('/api/auth', authRoutes)
 app.use('/api/integrations', integrationRoutes)
 app.use('/api/workspaces', workspaceRoutes)
+app.use('/api/alerts', alertRoutes)
 
 app.get('/', (req, res) => {
   res.json({ message: 'StartupOS API running' })
