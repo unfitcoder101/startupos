@@ -1,6 +1,15 @@
 const Alert = require('../models/Alert')
 const Workspace = require('../models/Workspace')
+const {runAlertEngine} = require('../services/alertEngineService')
 
+const triggerAlertEngine = async (req, res) => {
+    try{
+        await runAlertEngine()
+        res.json({message: 'Alert engine ran successfully'})
+    }catch( error){
+        res.status(500).json({message: error.message})
+    }
+}
 const createAlert = async  (req, res) => {
    const {workspace, type, threshold, operator, slackWebhook} = req.body
    try{
@@ -38,4 +47,4 @@ const getAlerts = async  (req, res) => {
 
 }
 
-module.exports = { createAlert, getAlerts }
+module.exports = { createAlert, getAlerts, triggerAlertEngine}

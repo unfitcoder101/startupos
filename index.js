@@ -1,6 +1,13 @@
 const express = require('express')
 require('dotenv').config()
 
+const cron = require('node-cron')
+const { runAlertEngine } = require('./server/services/alertEngineService')
+
+// Run every hour
+cron.schedule('0 * * * *', () => {
+    runAlertEngine()
+})
 const connectDB = require('./server/config/db')
 const workspaceRoutes = require('./server/routes/workspace')
 const authRoutes = require('./server/routes/auth')
