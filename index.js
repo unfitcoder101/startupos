@@ -2,7 +2,8 @@ const express = require('express')
 require('dotenv').config()
 
 const cron = require('node-cron')
-const { runAlertEngine } = require('./server/services/alertEngineService')
+const cors = require('cors')
+
 
 // Run every hour
 cron.schedule('0 * * * *', () => {
@@ -13,9 +14,17 @@ const workspaceRoutes = require('./server/routes/workspace')
 const authRoutes = require('./server/routes/auth')
 const integrationRoutes = require('./server/routes/integrations')
 const alertRoutes = require('./server/routes/alerts')
+const { runAlertEngine } = require('./server/services/alertEngineService')
+
 connectDB()
 
 const app = express()
+
+app.use(cors({
+    origin: ['http://localhost:5173', 'https://your-vercel-url.vercel.app'],
+    credentials: true
+}))
+
 app.use(express.json())
 
 app.use('/api/auth', authRoutes)

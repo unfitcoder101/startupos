@@ -3,9 +3,16 @@ const path = require('path')
 
 const getLeads = async (sheetId) => {
     try {
-        // 1. Set up auth — point to your credentials file
+
+
+
+        // 1. Set up auth — different path for local vs production
+        const credentialsPath = process.env.NODE_ENV === 'production'
+            ? '/etc/secrets/google-credentials.json'
+            : path.join(__dirname, '../../google-credentials.json')
+
         const auth = new google.auth.GoogleAuth({
-            keyFile: path.join(__dirname, '../../google-credentials.json'),
+            keyFile: credentialsPath,
             scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly']
         })
 
