@@ -1,8 +1,20 @@
+Good call separating the mock interview into its own chat — keeps this one focused on building.
+
+---
+
+## README — Use This Now, Update Tomorrow
+
+Your README is solid as-is. Just add live links at the top and fix two stale lines:
+
+```markdown
 # StartupOS
 
 A unified internal operations dashboard for early-stage startups. Pulls GitHub activity, lead data from Google Sheets, and automates alerts via Slack — all in one place.
 
 Built for founders running 2-10 person teams who can't afford a $500/month Zapier + Notion stack.
+
+**Live Demo:** https://startupos-beta.vercel.app
+**Backend API:** https://startupos-backend.onrender.com
 
 ---
 
@@ -13,13 +25,14 @@ Built for founders running 2-10 person teams who can't afford a $500/month Zapie
 - **Google Sheets integration** — reads lead/data sheets directly via service account
 - **Alert engine** — rule-based threshold alerts (e.g. "if open PRs > 10, ping Slack")
 - **Automated scheduling** — hourly cron job auto-checks all alerts
-- **Manual trigger** — on-demand endpoint to run the alert engine
+- **React dashboard** — live metrics, JWT-secured, deployed
 
 ---
 
 ## Tech Stack
 
 **Backend:** Node.js, Express, MongoDB (Mongoose)
+**Frontend:** React, Tailwind CSS
 **Auth:** JWT + bcrypt
 **External APIs:** GitHub REST API, Google Sheets API v4
 **Automation:** node-cron, Slack incoming webhooks
@@ -29,9 +42,9 @@ Built for founders running 2-10 person teams who can't afford a $500/month Zapie
 
 ## Architecture
 
-\`\`\`
+```
 Routes → Middleware (auth) → Controllers → Services → External APIs / DB
-\`\`\`
+```
 
 - **Controllers** stay thin — just request/response handling
 - **Services** hold all business logic (testable, reusable)
@@ -45,30 +58,30 @@ This separation means the alert engine can run from a cron job, an HTTP endpoint
 ## API Endpoints
 
 ### Auth
-- \`POST /api/auth/register\` — create account
-- \`POST /api/auth/login\` — get JWT
-- \`GET /api/auth/me\` — current user (protected)
+- `POST /api/auth/register` — create account
+- `POST /api/auth/login` — get JWT
+- `GET /api/auth/me` — current user (protected)
 
 ### Workspaces
-- \`POST /api/workspaces\` — create workspace (protected)
-- \`GET /api/workspaces\` — list user's workspaces (protected)
+- `POST /api/workspaces` — create workspace (protected)
+- `GET /api/workspaces` — list user's workspaces (protected)
 
 ### Integrations
-- \`GET /api/integrations/github/:owner/:repo\` — fetch repo stats
-- \`GET /api/integrations/sheets/:sheetId\` — fetch sheet rows
+- `GET /api/integrations/github/:owner/:repo` — fetch repo stats
+- `GET /api/integrations/sheets/:sheetId` — fetch sheet rows
 
 ### Alerts
-- \`POST /api/alerts\` — create alert rule (protected)
-- \`GET /api/alerts\` — list user's alerts (protected)
-- \`POST /api/alerts/run\` — manually trigger alert engine (protected)
+- `POST /api/alerts` — create alert rule (protected)
+- `GET /api/alerts` — list user's alerts (protected)
+- `POST /api/alerts/run` — manually trigger alert engine (protected)
 
 ---
 
 ## Data Model
 
-\`\`\`
+```
 User → owns → Workspace → has many → Alert
-\`\`\`
+```
 
 Each alert references a workspace. Each workspace references a user. Ownership is enforced at every endpoint via JWT + Mongoose population.
 
@@ -76,28 +89,34 @@ Each alert references a workspace. Each workspace references a user. Ownership i
 
 ## Local Setup
 
-\`\`\`bash
+```bash
 git clone https://github.com/unfitcoder101/startupos.git
 cd startupos
 npm install
-\`\`\`
+```
 
-Create \`.env\`:
-
-\`\`\`
+Create `.env`:
+```
 PORT=5050
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret
 GITHUB_TOKEN=your_github_pat
 GOOGLE_SHEET_ID=your_test_sheet_id
-\`\`\`
+```
 
-Add \`google-credentials.json\` (Google Cloud service account key) to project root.
+Add `google-credentials.json` (Google Cloud service account key) to project root.
 
 Run:
-\`\`\`bash
+```bash
 node index.js
-\`\`\`
+```
+
+For frontend:
+```bash
+cd client
+npm install
+npm run dev
+```
 
 ---
 
@@ -115,11 +134,11 @@ Most "dashboards" are CRUD apps with charts. StartupOS is an **event-driven auto
 ## Roadmap
 
 - [x] Backend complete (auth, integrations, alerts, cron)
-- [ ] React dashboard (in progress)
-- [ ] Deploy to Render + Vercel
+- [x] React dashboard
+- [x] Deployed to Render + Vercel
+- [ ] Workspace + alert creation UI
 - [ ] Email digest (weekly summary)
 - [ ] Webhook receiver (auto-create requests from external events)
-- [ ] AI workflow suggestions
 
 ---
 
@@ -127,5 +146,4 @@ Most "dashboards" are CRUD apps with charts. StartupOS is an **event-driven auto
 
 Built by [Harshvardhan Kasliwal](https://github.com/unfitcoder101) — MCA student at NIT Jamshedpur, founder of Elevana Global.
 
-Open to remote backend / full-stack internships. Reach out on [Twitter/X](https://x.com/unfitcoder) or [LinkedIn](https://www.linkedin.com/in/harshvardhan-kasliwal-675207229/). 
-\`\`\`
+Open to remote backend / full-stack internships. Reach out on [Twitter/X](https://x.com/unfitcoder) or [LinkedIn](https://www.linkedin.com/in/harshvardhan-kasliwal-675207229/).
