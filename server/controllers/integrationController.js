@@ -24,5 +24,14 @@ const getGithubStats = async (req, res) => {
     }
 
 }
+const handleGithubWebhook = async (req, res) => {
+    try {
+        const event = req.body
+        console.log('Webhook received:', event.action || 'unknown event')
+        res.status(200).json({ received: true })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
 
-module.exports = {getGithubStats, getSheetLeads}
+module.exports = {getGithubStats, getSheetLeads, handleGithubWebhook}
