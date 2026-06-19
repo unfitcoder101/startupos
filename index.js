@@ -5,6 +5,7 @@ const cron = require('node-cron')
 const cors = require('cors')
 
 const connectDB = require('./server/config/db')
+const { sendWeeklyDigest } = require('./server/services/digestService')
 const workspaceRoutes = require('./server/routes/workspace')
 const authRoutes = require('./server/routes/auth')
 const integrationRoutes = require('./server/routes/integrations')
@@ -34,6 +35,10 @@ app.get('/', (req, res) => {
 // Run every hour
 cron.schedule('0 * * * *', () => {
     runAlertEngine()
+})
+
+cron.schedule('0 9 * * 1', () => {
+    sendWeeklyDigest()
 })
 
 const PORT = process.env.PORT || 8000

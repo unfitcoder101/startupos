@@ -1,6 +1,7 @@
 const Alert = require('../models/Alert')
 const Workspace = require('../models/Workspace')
 const {runAlertEngine} = require('../services/alertEngineService')
+const { sendWeeklyDigest } = require('../services/digestService')
 
 const triggerAlertEngine = async (req, res) => {
     try{
@@ -47,4 +48,13 @@ const getAlerts = async  (req, res) => {
 
 }
 
-module.exports = { createAlert, getAlerts, triggerAlertEngine}
+const triggerDigest = async (req, res) => {
+    try {
+        await sendWeeklyDigest()
+        res.json({ message: 'Digest sent successfully' })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
+module.exports = { createAlert, getAlerts, triggerAlertEngine, triggerDigest}
