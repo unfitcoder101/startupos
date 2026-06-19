@@ -138,9 +138,9 @@ Most "dashboards" are CRUD apps with charts. StartupOS is an **event-driven auto
 - [x] Deployed to Render + Vercel
 - [x] Weekly email digest
 - [x] GitHub webhook receiver
-- [ ] AI workflow suggestions
-- [ ] Drag-and-drop workflow builder
-- [ ] Multi-channel alerts (email, SMS, Discord)
+- [ ] AI workflow suggestions (future)
+- [ ] Drag-and-drop workflow builder (future)
+- [ ] Multi-channel alerts — SMS, Discord (future)
 
 ---
 
