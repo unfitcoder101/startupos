@@ -9,8 +9,10 @@ const runAlertEngine = async () => {
 
     try{
         const alerts = await Alert.find().populate('workspace')
+        console.log('Found alerts:', alerts.length)
 
         for( const alert of alerts){
+            console.log('Processing alert:', alert._id, 'workspace:', alert.workspace ? alert.workspace.name : 'NULL')
             //1. Skip if no workspace (orphaned alert)
             if(!alert.workspace) continue
             //2. Get current value
@@ -22,7 +24,7 @@ const runAlertEngine = async () => {
                const [owner, repo] = alert.workspace.githubRepo.split('/')
                const stats = await getRepoStats(owner, repo)
                currentValue = alert.type === 'github_prs' ? stats.openPRs : stats.openIssues
-            
+                console.log('Current value:', currentValue, 'Threshold:', alert.threshold)
             }
             if(alert.type === 'sheet_rows'){
                 if(!alert.workspace.sheetId) continue
@@ -33,7 +35,8 @@ const runAlertEngine = async () => {
             if(alert.operator === 'greater_than' && currentValue > alert.threshold) shouldFire = true
             if(alert.operator === 'less_than' && currentValue < alert.threshold)  shouldFire = true
             if(alert.operator === 'equals' && currentValue === alert.threshold) shouldFire = true
-            
+            console.log('Should fire:', shouldFire)
+
             //4. Cooldown: don't fire if fired in last hour
             if(alert.lastFired){
                 const hourAgo = new Date(Date.now() - 60*60*1000)
@@ -41,6 +44,7 @@ const runAlertEngine = async () => {
             }
             //5. Fire Slack webhook
             if(shouldFire){
+                console.log('Firing webhook to:', alert.slackWebhook)
                 await axios.post(alert.slackWebhook, {
                     text: `🚨 StartupOS Alert: ${alert.type} is ${currentValue} (threshold: ${alert.threshold})`
                 })
