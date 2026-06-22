@@ -11,6 +11,15 @@ const triggerAlertEngine = async (req, res) => {
         res.status(500).json({message: error.message})
     }
 }
+const deleteAlert = async (req, res) => {
+    try {
+        await Alert.findByIdAndDelete(req.params.id)
+        res.json({ message: 'Alert deleted' })
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
 const createAlert = async  (req, res) => {
    const {workspace, type, threshold, operator, slackWebhook} = req.body
    try{
@@ -57,4 +66,4 @@ const triggerDigest = async (req, res) => {
     }
 }
 
-module.exports = { createAlert, getAlerts, triggerAlertEngine, triggerDigest}
+module.exports = { createAlert, getAlerts, deleteAlert, triggerAlertEngine, triggerDigest}
