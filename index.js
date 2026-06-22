@@ -12,9 +12,18 @@ const integrationRoutes = require('./server/routes/integrations')
 const alertRoutes = require('./server/routes/alerts')
 const { runAlertEngine } = require('./server/services/alertEngineService')
 
-connectDB()
+let isConnected = false
+
+const ensureDBConnected = async (req, res, next) => {
+    if (!isConnected) {
+        await connectDB()
+        isConnected = true
+    }
+    next()
+}
 
 const app = express()
+app.use(ensureDBConnected)
 
 app.use(cors({
     origin: ['http://localhost:5173', 'https://startupos-beta.vercel.app'],
