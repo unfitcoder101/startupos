@@ -32,6 +32,7 @@ app.get('/', (req, res) => {
   res.json({ message: 'StartupOS API running' })
 })
 
+/*
 // Run every hour
 cron.schedule('0 * * * *', () => {
     runAlertEngine()
@@ -40,6 +41,7 @@ cron.schedule('0 * * * *', () => {
 cron.schedule('0 9 * * 1', () => {
     sendWeeklyDigest()
 })
+*/
 
 const PORT = process.env.PORT || 8000
 app.listen(PORT, '0.0.0.0', () => {
