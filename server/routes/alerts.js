@@ -9,3 +9,43 @@ router.get('/', protect, getAlerts)
 router.post('/run', protect, triggerAlertEngine)
 
 module.exports = router
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

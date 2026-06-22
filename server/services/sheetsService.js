@@ -7,12 +7,10 @@ const getLeads = async (sheetId) => {
 
 
         // 1. Set up auth — different path for local vs production
-        const credentialsPath = process.env.NODE_ENV === 'production'
-            ? '/etc/secrets/google-credentials.json'
-            : path.join(__dirname, '../../google-credentials.json')
+        const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS_JSON)
 
         const auth = new google.auth.GoogleAuth({
-            keyFile: credentialsPath,
+            credentials: credentials,
             scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly']
         })
 
