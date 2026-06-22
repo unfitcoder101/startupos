@@ -44,14 +44,19 @@ const runAlertEngine = async () => {
             }
             //5. Fire Slack webhook
             if(shouldFire){
-                console.log('Firing webhook to:', alert.slackWebhook)
-                await axios.post(alert.slackWebhook, {
-                    text: `🚨 StartupOS Alert: ${alert.type} is ${currentValue} (threshold: ${alert.threshold})`
-                })
-                alert.lastFired = new Date() 
-                await alert.save()
-                console.log(`Alert fired for ${alert.type}`)
-            }
+    try {
+        console.log('Firing webhook to:', alert.slackWebhook)
+        await axios.post(alert.slackWebhook, {
+            text: `🚨 StartupOS Alert: ${alert.type} is ${currentValue} (threshold: ${alert.threshold})`
+        })
+        alert.lastFired = new Date() 
+        await alert.save()
+        console.log(`Alert fired for ${alert.type}`)
+    } catch (webhookError) {
+        console.error(`Webhook failed for alert ${alert._id}:`, webhookError.message)
+        // Continue to next alert instead of crashing the whole loop
+    }
+}
         }
         console.log('Alert engine complete.')
     }catch(error){
