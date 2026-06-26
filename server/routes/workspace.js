@@ -6,4 +6,4 @@ router.delete('/:id', protect, deleteWorkspace)
 router.post('/',  protect, createWorkspace)
 router.get('/',  protect, getWorkspaces)
 
-module.exports = router 
+module.exports = router
