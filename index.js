@@ -46,7 +46,6 @@ app.get('/', (req, res) => {
 cron.schedule('0 * * * *', () => {
     runAlertEngine()
 })
-
 cron.schedule('0 9 * * 1', () => {
     sendWeeklyDigest()
 })
