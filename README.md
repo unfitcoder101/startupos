@@ -73,6 +73,7 @@ This separation means the alert engine runs identically from a cron job, an HTTP
 ---
 
 ## Data Model
+
 User → owns → Workspace → has many → Alert
 
 Each alert references a workspace. Each workspace references a user. Ownership enforced at every endpoint via JWT + Mongoose population.
