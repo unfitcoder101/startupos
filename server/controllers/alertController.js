@@ -11,6 +11,7 @@ const triggerAlertEngine = async (req, res) => {
         res.status(500).json({message: error.message})
     }
 }
+
 const deleteAlert = async (req, res) => {
     try {
         await Alert.findByIdAndDelete(req.params.id)
