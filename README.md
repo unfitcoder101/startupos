@@ -9,8 +9,8 @@ Built for founders running 2-10 person teams who can't afford a $500/month Zapie
 **Demo Video:** [Loom link — add after recording]
 
 ---
-                 
-## What It Does
+                                 
+## What It Does                                 
 
 - **Multi-tenant workspaces** — each founder manages their own startup data
 - **GitHub integration** — live PR, issue, and commit counts for any repo
