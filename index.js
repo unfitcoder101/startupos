@@ -10,13 +10,13 @@ const workspaceRoutes = require('./server/routes/workspace')
 const authRoutes = require('./server/routes/auth')
 const integrationRoutes = require('./server/routes/integrations')
 const alertRoutes = require('./server/routes/alerts')
-const { runAlertEngine } = require('./server/services/alertEngineService')
+const { runAlertEngine } = require('./server/services/alertEngineService')                
 
 let isConnected = false
 
 const ensureDBConnected = async (req, res, next) => {
-    if (!isConnected) {
-        await connectDB()
+    if (!isConnected) {                 
+        await connectDB()                    
         isConnected = true
     }
     next()
