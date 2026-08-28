@@ -16,15 +16,19 @@ function Login() {
 
         try{
             const response = await api.post('/api/auth/login', { email, password })
-console.log('response:', response.data)  // add this
-localStorage.setItem('token', response.data.token)
+            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('user', JSON.stringify({
+                id: response.data.id,
+                name: response.data.name,
+                email: response.data.email,
+                role: response.data.role
+            }))
             navigate('/dashboard')
         }catch(err){
             setError(err.response?.data?.message || 'Login failed')
         } finally {
             setLoading(false)
         }
-        
     }
 
     return (
@@ -34,7 +38,7 @@ localStorage.setItem('token', response.data.token)
                 <p className="text-gray-400 mb-8">Sign in to your dashboard</p>
 
                 {error && (
-                    <div className="bg-red-500/100 border border-red-500 text-red-400 py-4 py-2 rounded mb-4 text-sm">
+                    <div className="bg-red-500/10 border border-red-500 text-red-400 py-3 px-4 rounded mb-4 text-sm">
                         {error}
                     </div>
                 )}
@@ -49,9 +53,8 @@ localStorage.setItem('token', response.data.token)
                             placeholder="you@example.com"
                         />
                     </div>
-
                     <div>
-                        <label className="block text-sm textgray-300 mb-2">Password</label>
+                        <label className="block text-sm text-gray-300 mb-2">Password</label>
                         <input
                             type="password"
                             value={password}
@@ -60,8 +63,7 @@ localStorage.setItem('token', response.data.token)
                             placeholder="••••••"
                         />
                     </div>
-
-                    <button 
+                    <button
                         onClick={handleLogin}
                         disabled={loading}
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded transition disabled:opacity-50"
@@ -74,14 +76,12 @@ localStorage.setItem('token', response.data.token)
                     No account? <span
                         onClick={() => navigate('/register')}
                         className="text-blue-400 cursor-pointer hover:underline"
-                >
-                    Sign up
+                    >
+                        Sign up
                     </span>
                 </p>
-
             </div>
-
-        </div>   
+        </div>
     )
 }
 
