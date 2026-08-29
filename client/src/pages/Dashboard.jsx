@@ -70,10 +70,6 @@ const [newWorkspaceRepo, setNewWorkspaceRepo] = useState('')
     }
 
     const fetchData = async () => {
-        console.log('fetchData running')
-        console.log('token:', localStorage.getItem('token'))
-
-
         try {
             // Fetch workspaces
             const wsRes = await api.get('/api/workspaces')
