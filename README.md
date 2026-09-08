@@ -6,7 +6,7 @@ Built for founders running 2-10 person teams who can't afford a $500/month Zapie
 
 **Live Demo:** https://startupos-beta.vercel.app  
 **Backend API:** https://your-render-url.onrender.com                 
-**Demo Video:** [Loom link — add after recording]
+**Demo Video:** []
 
 ---
                                  
