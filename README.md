@@ -5,7 +5,7 @@ A unified internal operations dashboard for early-stage startups. Pulls GitHub a
 Built for founders running 2-10 person teams who can't afford a $500/month Zapier + Notion stack.               
 
 **Live Demo:** https://startupos-beta.vercel.app  
-**Backend API:** https://your-render-url.onrender.com                 
+**Backend API:** [https://startupos-tbh2.vercel.app/]                 
 **Demo Video:** [https://www.loom.com/share/35b2b7760b214e45aed9c65ed6199d74]
 
 ---
