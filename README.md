@@ -150,4 +150,4 @@ Most "dashboards" are CRUD apps with charts. StartupOS is an **event-driven auto
 Built by [Harshvardhan Kasliwal](https://github.com/unfitcoder101) — MCA student at NIT Jamshedpur, founder of Elevana Global.
 
 Open to remote backend / full-stack internships.  
-[Twitter/X](https://x.com/unfitcoder) · [LinkedIn](https://www.linkedin.com/in/harshvardhan-kasliwal-675207229/)
+[Twitter/X](https://x.com/unfitcoder) · [LinkedIn](https://www.linkedin.com/in/harshvardhan-kasliwal-675207229/) · [X](https://x.com/unfitcoder)
