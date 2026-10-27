@@ -35,16 +35,16 @@ Built for founders running 2-10 person teams who can't afford a $500/month Zapie
 
 ---
 
-## Architecture
+## Architecture                   
+                   
+Routes → Middleware (JWT auth) → Controllers → Services → External APIs / DB                      
 
-Routes → Middleware (JWT auth) → Controllers → Services → External APIs / DB       
-
-- **Controllers** stay thin — just request/response handling           
-- **Services** hold all business logic (testable, reusable, callable from cron OR HTTP)
-- **Models** define data shape and relationships          
-- **Middleware** handles cross-cutting auth concerns            
-       
-This separation means the alert engine runs identically from a cron job, an HTTP endpoint, or any future trigger — no code duplication.
+- **Controllers** stay thin — just request/response handling                           
+- **Services** hold all business logic (testable, reusable, callable from cron OR HTTP)            
+- **Models** define data shape and relationships                           
+- **Middleware** handles cross-cutting auth concerns                         
+                              
+This separation means the alert engine runs identically from a cron job, an HTTP endpoint, or any future trigger — no code duplication.                   
 
 ---
 
@@ -54,18 +54,18 @@ This separation means the alert engine runs identically from a cron job, an HTTP
 - `POST /api/auth/register` — create account
 - `POST /api/auth/login` — get JWT token         
 - `GET /api/auth/me` — current user (protected)        
+                 
+### Workspaces                     
+- `POST /api/workspaces` — create workspace (protected)                   
+- `GET /api/workspaces` — list user's workspaces (protected)                    
+                         
+### Integrations                    
+- `GET /api/integrations/github/:owner/:repo` — fetch live repo stats                   
+- `GET /api/integrations/sheets/:sheetId` — fetch sheet rows                              
+- `POST /api/integrations/webhook/github` — receive GitHub webhook events                      
 
-### Workspaces
-- `POST /api/workspaces` — create workspace (protected)
-- `GET /api/workspaces` — list user's workspaces (protected)
-
-### Integrations
-- `GET /api/integrations/github/:owner/:repo` — fetch live repo stats        
-- `GET /api/integrations/sheets/:sheetId` — fetch sheet rows           
-- `POST /api/integrations/webhook/github` — receive GitHub webhook events         
-
-### Alerts 
-- `POST /api/alerts` — create alert rule (protected)
+### Alerts                   
+- `POST /api/alerts` — create alert rule (protected)                 
 - `GET /api/alerts` — list user's alerts (protected)              
 - `POST /api/alerts/run` — manually trigger alert engine (protected)
 - `POST /api/alerts/digest` — manually trigger weekly digest (protected)            
