@@ -1,8 +1,8 @@
 # StartupOS
 
-A unified internal operations dashboard for early-stage startups. Pulls GitHub activity, lead data from Google Sheets, and automates alerts via Slack — all in one place.
+A unified internal operations dashboard for early-stage startups. Pulls GitHub activity, lead data from Google Sheets, and automates alerts via Slack — all in one place.                        
                 
-Built for founders running 2-10 person teams who can't afford a $500/month Zapier + Notion stack.               
+Built for founders running 2-10 person teams who can't afford a $500/month Zapier + Notion stack.                                          
 
 **Live Demo:** https://startupos-beta.vercel.app  
 **Backend API:** [https://startupos-tbh2.vercel.app/]                 
@@ -10,7 +10,7 @@ Built for founders running 2-10 person teams who can't afford a $500/month Zapie
 
 ---
                                  
-## What It Does                                 
+## What It Does                                                             
 
 - **Multi-tenant workspaces** — each founder manages their own startup data
 - **GitHub integration** — live PR, issue, and commit counts for any repo
